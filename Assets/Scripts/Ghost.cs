@@ -9,6 +9,7 @@ namespace Enemy
         [SerializeField] protected float moveSpeed;
 
         protected GameObject player;
+        protected bool hasReachedPlayer = false;
 
         protected void Start()
         {
@@ -16,7 +17,10 @@ namespace Enemy
         }
         protected void Update()
         {
-            ChasingPlayer();
+            if(!hasReachedPlayer)
+            {
+                ChasingPlayer();
+            }
         }
         protected void FindingPlayer()
         {
@@ -30,6 +34,13 @@ namespace Enemy
             }
             Vector3 moveDir = player.transform.position - this.gameObject.transform.position;
             transform.Translate(moveDir.normalized * moveSpeed * Time.deltaTime);
+        }
+        protected void OnCollisionEnter2D(Collision2D col)
+        {
+            if(col.gameObject.CompareTag("Player"))
+            {
+                hasReachedPlayer = true;
+            }
         }
     }
 }

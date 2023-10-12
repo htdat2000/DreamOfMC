@@ -22,9 +22,7 @@ namespace Player
 
         protected void Move()
         {
-            Debug.Log("Move");
             Vector2 moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            Debug.Log(moveDir);
             rb.velocity = moveDir.normalized * moveSpeed;        
         }
     }
